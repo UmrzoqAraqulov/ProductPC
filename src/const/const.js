@@ -1,0 +1,1 @@
+export const ENPOIND = "https://64b3d53d0efb99d862686c56.mockapi.io/shopping/all";
