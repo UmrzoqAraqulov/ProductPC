@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ENPOIND } from "../const/const";
 
 const ProductInfoPage = () => {
   const [product, setProduct] = useState({});
@@ -10,10 +11,9 @@ const ProductInfoPage = () => {
     const getPc = async () => {
       try {
         const { data } = await axios.get(
-          `https://64b3d53d0efb99d862686c56.mockapi.io/shopping/all/${params.id}`
+          `${ENPOIND+"/"+params.id}`
         );
         setProduct(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }

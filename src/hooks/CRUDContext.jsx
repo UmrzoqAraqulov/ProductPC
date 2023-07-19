@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { ENPOIND } from "../const/const";
 
 export const ProductContext = createContext();
@@ -24,19 +24,19 @@ const CRUDContext = ({ children }) => {
     setShow(!show);
   };
 
-  const getData = () => {
-    try {
-      axios(`${ENPOIND}?Manufacturer=${search}`).then(({ data }) => {
+  const getData = useCallback(() => {
+    axios(`${ENPOIND}?Manufacturer=${search}`)
+      .then(({ data }) => {
         setProducts(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  }, [search]);
 
   useEffect(() => {
     getData();
-  }, [search, products]);
+  }, [getData]);
 
   const addProduct = () => {
     setSelected(null);
